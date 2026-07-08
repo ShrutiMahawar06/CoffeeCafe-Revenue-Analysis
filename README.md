@@ -1,5 +1,5 @@
 ![Banner](banner.png)
-# ☕ Coffee Revenue Intelligence
+# ☕ CoffeeCafe-Revenue-Analysis
 
 > **Turning 1,49,116 coffee transactions into actionable business insights**
 
