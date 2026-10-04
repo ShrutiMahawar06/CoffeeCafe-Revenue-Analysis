@@ -29,13 +29,13 @@ Afficionado Coffee Roasters had no clear visibility into:
 
 | Metric | Value |
 |---|---|
-| 💰 Total Revenue | ₹ 6,98,812 |
+| 💰 Total Revenue | $ 6,98,812 |
 | 🧾 Total Transactions | 1,49,116 |
-| 🛍️ Unique Products | 80 |
+| 🛍️ Product Variants | 80 |
 | 🏆 Top Category | Coffee (38.6%) |
-| ⭐ Hero Products | 42 out of 80 drive 80% revenue |
-| 📈 Highest Revenue Product | Sustainably Grown Organic Lg (₹21,151) |
-| 📉 Lowest Revenue Product | Dark Chocolate regular (₹755) |
+| ⭐ Hero Products | 43 out of 80 variants drive 80.5% of revenue |
+| 📈 Highest Revenue Product | Sustainably Grown Organic Lg ($21,151) |
+| 📉 Lowest Revenue Product | Dark chocolate, no size listed ($755) |
 
 ---
 
@@ -61,11 +61,11 @@ Afficionado Coffee Roasters had no clear visibility into:
 
 > 💬 **Insight 1:** Coffee + Tea together = **66.7% of revenue** — the business is heavily dependent on these two categories
 
-> 💬 **Insight 2:** **Popularity ≠ Profitability** — Earl Grey Rg is the most sold product but doesn't appear in top revenue products
+> 💬 **Insight 2:** **Popularity ≠ Revenue** — Earl Grey Rg is the most sold product but doesn't appear in top revenue products
 
-> 💬 **Insight 3:** **38 products contribute only 20% of revenue** — strong menu simplification opportunity
+> 💬 **Insight 3:** **37 product variants contribute only 19.5% of revenue** — strong menu simplification opportunity
 
-> 💬 **Insight 4:** **Large size variants always outperform** small and regular sizes across all product lines
+> 💬 **Insight 4:** **On average, large-size variants earn more revenue per variant ($14,872) than regular ($12,485) and small ($9,281)** small and regular sizes across all product lines
 
 ---
 
@@ -85,7 +85,7 @@ Afficionado Coffee Roasters had no clear visibility into:
 
 | File | Description |
 |---|---|
-| `analysis.py` | Data loading, cleaning, revenue analysis, Pareto |
+| `analysis.py` | Data loading, cleaning, revenue analysis, Pareto,size comparison |
 | `charts.py` | Static chart generation |
 | `dashboard.py` | Interactive Streamlit web dashboard |
 | `research_paper.docx` | Detailed EDA report |
