@@ -1,14 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import pandas as pd
-import matplotlib.pyplot as plt
 
 # Load data
-df = pd.read_csv(r"C:\Users\shrut\OneDrive\Desktop\project unified mentor\_Coffee Roasters.xlsx - Transactions.csv")
+df = pd.read_csv("_Coffee Roasters.xlsx - Transactions.csv")
 
 # Calculate revenue
 df['Revenue'] = df['transaction_qty'] * df['unit_price']
-Total_revenue = df['Revenue'].sum()
 
 # Top 10 products by revenue
 top10_revenue = df.groupby('product_detail')['Revenue'].sum().sort_values(ascending=False).head(10)
@@ -16,8 +13,9 @@ top10_revenue = df.groupby('product_detail')['Revenue'].sum().sort_values(ascend
 # Draw bar chart
 plt.figure(figsize=(12, 6))
 plt.barh(top10_revenue.index, top10_revenue.values, color='brown')
+plt.gca().invert_yaxis()
 plt.title('Top 10 Products by Revenue')
-plt.xlabel('Revenue (₹)')
+plt.xlabel('Revenue ($)')
 plt.ylabel('Product')
 plt.tight_layout()
 plt.savefig('top10_revenue.png')
@@ -42,7 +40,7 @@ bottom10_revenue = df.groupby('product_detail')['Revenue'].sum().sort_values(asc
 plt.figure(figsize=(12, 6))
 plt.barh(bottom10_revenue.index, bottom10_revenue.values, color='red')
 plt.title('Bottom 10 Products by Revenue')
-plt.xlabel('Revenue (₹)')
+plt.xlabel('Revenue ($)')
 plt.ylabel('Product')
 plt.tight_layout()
 plt.savefig('bottom10_revenue.png')

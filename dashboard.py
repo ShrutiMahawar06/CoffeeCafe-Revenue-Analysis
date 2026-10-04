@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 # Load data
-df = pd.read_csv(r"C:\Users\shrut\OneDrive\Desktop\project unified mentor\_Coffee Roasters.xlsx - Transactions.csv")
+df = pd.read_csv("_Coffee Roasters.xlsx - Transactions.csv")
 
 # Calculate revenue
 df['Revenue'] = df['transaction_qty'] * df['unit_price']
@@ -15,16 +15,6 @@ df['Revenue'] = df['transaction_qty'] * df['unit_price']
 # ---- PAGE TITLE ----
 st.title("☕ Afficionado Coffee Roasters")
 st.subheader("Product Optimization & Revenue Analysis Dashboard")
-
-# ---- KPI CARDS ----
-Total_revenue = df['Revenue'].sum()
-total_transactions = len(df)
-total_products = df['product_detail'].nunique()
-
-col1, col2, col3 = st.columns(3)
-col1.metric("Total Revenue", f"₹ {Total_revenue:,.0f}")
-col2.metric("Total Transactions", f"{total_transactions:,}")
-col3.metric("Unique Products", total_products)
 
 # ---- SIDEBAR FILTERS ----
 st.sidebar.header("Filters")
@@ -51,6 +41,19 @@ filtered_df = df[
 ]
 
 st.write(f"Showing {len(filtered_df):,} transactions")
+if filtered_df.empty:
+    st.warning("Please select at least one category and one store.")
+    st.stop()
+
+# ---- KPI CARDS (based on the filters) ----
+Total_revenue = filtered_df['Revenue'].sum()
+total_transactions = len(filtered_df)
+total_products = filtered_df['product_detail'].nunique()
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Revenue", f"$ {Total_revenue:,.0f}")
+col2.metric("Total Transactions", f"{total_transactions:,}")
+col3.metric("Product Variants", total_products)
 
 # ---- CHART 1 - Revenue by Category ----
 st.subheader("Revenue by Category")
@@ -58,7 +61,7 @@ category_revenue = filtered_df.groupby('product_category')['Revenue'].sum().sort
 
 fig1, ax1 = plt.subplots(figsize=(10, 5))
 ax1.barh(category_revenue.index, category_revenue.values, color='brown')
-ax1.set_xlabel('Revenue (₹)')
+ax1.set_xlabel('Revenue ($)')
 ax1.set_title('Revenue by Category')
 st.pyplot(fig1)
 
@@ -68,7 +71,7 @@ top_products = filtered_df.groupby('product_detail')['Revenue'].sum().sort_value
 
 fig2, ax2 = plt.subplots(figsize=(10, 5))
 ax2.barh(top_products.index, top_products.values, color='sienna')
-ax2.set_xlabel('Revenue (₹)')
+ax2.set_xlabel('Revenue ($)')
 ax2.set_title(f'Top {top_n} Products by Revenue')
 st.pyplot(fig2)
 
@@ -87,7 +90,7 @@ bottom10 = filtered_df.groupby('product_detail')['Revenue'].sum().sort_values(as
 
 fig4, ax4 = plt.subplots(figsize=(10, 5))
 ax4.barh(bottom10.index, bottom10.values, color='red')
-ax4.set_xlabel('Revenue (₹)')
+ax4.set_xlabel('Revenue ($)')
 ax4.set_title('Bottom 10 Products by Revenue')
 st.pyplot(fig4)
 
@@ -121,6 +124,6 @@ for i, row in scatter_data.iterrows():
                 fontsize=7, alpha=0.8)
 
 ax5.set_xlabel('Total Quantity Sold (Popularity)')
-ax5.set_ylabel('Total Revenue (₹)')
+ax5.set_ylabel('Total Revenue ($)')
 ax5.set_title('Product Popularity vs Revenue')
 st.pyplot(fig5)
